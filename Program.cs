@@ -42,7 +42,7 @@ namespace SemanticKernelTests
                                 apiKey: "THEREPUTYOURCHATGPTKEY"
                         );
 
-                        builder.Services.AddKernel().Plugins.AddFromType<CompanyInfoPlugin>();
+                        builder.Services.AddKernel().Plugins.AddFromType<StreamerInfoPlugin>();
 
                         var app = builder.Build();
 
