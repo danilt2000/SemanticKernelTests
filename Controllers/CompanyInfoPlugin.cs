@@ -4,116 +4,184 @@ using Microsoft.SemanticKernel;
 
 namespace SemanticKernelTests.Controllers;
 
-public class CompanyInfoPlugin
+public class StreamerInfoPlugin
 {
-        [KernelFunction("get_general_info")]
-        [Description("Gets general information about the company")]
-        [return: Description("An object containing general company details")]
-        public async Task<GeneralInfoModel> GetGeneralInfoAsync()
+    [KernelFunction("get_general_info")]
+    [Description("Получает общую информацию о стримере")]
+    [return: Description("Объект с общей информацией о стримере")]
+    public async Task<GeneralInfoModel> GetGeneralInfoAsync()
+    {
+        return new GeneralInfoModel
         {
-                return new GeneralInfoModel
-                {
-                        Name = "ElysiumCasino",
-                        Description = "A top-tier project aiming to revolutionize the industry with quality and innovation.",
-                        Founders = new List<string> { "Hepatica", "Rafaello", "Gobnik" },
-                        EstablishedYear = 2024,
-                        Mission = "To create a product that generates income and improves career opportunities for its team members."
-                };
-        }
-
-        [KernelFunction("get_team_members")]
-        [Description("Gets information about the team members")]
-        [return: Description("A list of team members with their roles and responsibilities")]
-        public async Task<List<TeamMember>> GetTeamMembersAsync()
-        {
-                return new List<TeamMember>
-        {
-            new TeamMember { Role = "Backend", Name = "Rafaello", Responsibilities = "Develops and maintains backend services." },
-            new TeamMember { Role = "Scrum Master", Name = "Hepatica", Responsibilities = "Oversees the Scrum process and facilitates team collaboration." },
-            new TeamMember { Role = "Frontend", Name = "Madara", Responsibilities = "Designs and implements the user interface." },
-            new TeamMember { Role = "Designer", Name = "Mayzito", Responsibilities = "Creates designs and ensures visual consistency." },
-            new TeamMember { Role = "PR & Marketing", Name = "Gobnik", Responsibilities = "Manages public relations and marketing campaigns." },
-            new TeamMember { Role = "Tester", Name = "BogyBuda", Responsibilities = "Ensures software quality through testing." },
-            new TeamMember { Role = "Tech Support", Name = "Gedpool", Responsibilities = "Provides technical support and troubleshooting." }
+            Name = "Hepatir",
+            Description = "Популярный Twitch-стример, создающий развлекательный контент для своей аудитории.",
+            TwitchChannel = "https://www.twitch.tv/hepatir",
+            Platform = "Twitch",
+            ContentType = "Gaming, развлечения, общение с чатом",
+            StartYear = 2020 // Укажите реальный год начала стриминга
         };
-        }
+    }
 
-        [KernelFunction("get_core_values")]
-        [Description("Gets the core values of the company")]
-        [return: Description("A list of core values")]
-        public async Task<List<string>> GetCoreValuesAsync()
+    [KernelFunction("get_stream_info")]
+    [Description("Получает информацию о стримах")]
+    [return: Description("Информация о расписании и типах стримов")]
+    public async Task<StreamInfo> GetStreamInfoAsync()
+    {
+        return new StreamInfo
         {
-                return new List<string>
-        {
-            "Innovation",
-            "Quality",
-            "Teamwork",
-            "Integrity"
+            Schedule = "Регулярные стримы по вечерам",
+            AverageStreamDuration = "4-6 часов",
+            PopularGames = new List<string>
+            {
+                "Valorant",
+                "CS2",
+                "Just Chatting",
+                "Variety Games"
+            },
+            Language = "Русский"
         };
-        }
+    }
 
-        [KernelFunction("get_current_projects")]
-        [Description("Gets the list of current projects")]
-        [return: Description("A list of current projects")]
-        public async Task<List<string>> GetCurrentProjectsAsync()
+    [KernelFunction("get_community_info")]
+    [Description("Получает информацию о сообществе стримера")]
+    [return: Description("Информация о сообществе и взаимодействии")]
+    public async Task<CommunityInfo> GetCommunityInfoAsync()
+    {
+        return new CommunityInfo
         {
-                return new List<string>
-        {
-            "Elysium Platform",
-            "Lucky Diamond Real Life Extension",
-            "Marketing Outreach Campaign 2025"
+            CommunityName = "Семья Hepatir",
+            Moderators = new List<string>
+            {
+                "Модератор1",
+                "Модератор2",
+                "Модератор3"
+            },
+            SubscriberPerks = new List<string>
+            {
+                "Уникальные эмоуты",
+                "Бейджи подписчика",
+                "Приоритет в чате",
+                "Доступ к закрытым дискорд-каналам"
+            },
+            DiscordAvailable = true
         };
-        }
+    }
 
-        [KernelFunction("get_news")]
-        [Description("Gets the latest news about the company")]
-        [return: Description("A list of news items")]
-        public async Task<List<NewsItem>> GetNewsAsync()
+    [KernelFunction("get_social_media")]
+    [Description("Получает ссылки на социальные сети стримера")]
+    [return: Description("Список социальных сетей и ссылок")]
+    public async Task<List<SocialMedia>> GetSocialMediaAsync()
+    {
+        return new List<SocialMedia>
         {
-                return new List<NewsItem>
-        {
-            new NewsItem { Date = "2024-12-16", Content = "We have a new designer, Fuper, as Bobrito departs." },
-            new NewsItem { Date = "2024-12-25", Content = "Skutls steps down as frontend lead, and Hepatica temporarily fills the role." },
-            new NewsItem { Date = "2025-01-09", Content = "Madara joins as the new frontend lead, with Hepatica transitioning to a full-stack support role." }
+            new SocialMedia { Platform = "Twitch", Url = "https://www.twitch.tv/hepatir" },
+            new SocialMedia { Platform = "Discord", Url = "Ссылка на Discord сервер" },
+            new SocialMedia { Platform = "VK", Url = "Ссылка на VK" },
+            new SocialMedia { Platform = "Telegram", Url = "Ссылка на Telegram канал" }
         };
-        }
+    }
+
+    [KernelFunction("get_achievements")]
+    [Description("Получает достижения стримера")]
+    [return: Description("Список достижений")]
+    public async Task<List<Achievement>> GetAchievementsAsync()
+    {
+        return new List<Achievement>
+        {
+            new Achievement { Date = "2023-06-15", Description = "Достиг 10,000 фолловеров на Twitch" },
+            new Achievement { Date = "2023-12-01", Description = "Провел 24-часовой благотворительный стрим" },
+            new Achievement { Date = "2024-03-20", Description = "Получил партнерство Twitch" }
+        };
+    }
+
+    [KernelFunction("get_recent_highlights")]
+    [Description("Получает последние яркие моменты со стримов")]
+    [return: Description("Список последних хайлайтов")]
+    public async Task<List<Highlight>> GetRecentHighlightsAsync()
+    {
+        return new List<Highlight>
+        {
+            new Highlight { Date = "2025-01-15", Description = "Эпичная победа в Valorant с камбэком 3-12" },
+            new Highlight { Date = "2025-01-10", Description = "Смешной момент с донатом, взорвавший чат" },
+            new Highlight { Date = "2025-01-05", Description = "Коллаборация с популярным стримером" }
+        };
+    }
 }
 
 public class GeneralInfoModel
 {
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
 
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
+    [JsonPropertyName("description")]
+    public string Description { get; set; }
 
-        [JsonPropertyName("founders")]
-        public List<string> Founders { get; set; }
+    [JsonPropertyName("twitch_channel")]
+    public string TwitchChannel { get; set; }
 
-        [JsonPropertyName("established_year")]
-        public int EstablishedYear { get; set; }
+    [JsonPropertyName("platform")]
+    public string Platform { get; set; }
 
-        [JsonPropertyName("mission")]
-        public string Mission { get; set; }
+    [JsonPropertyName("content_type")]
+    public string ContentType { get; set; }
+
+    [JsonPropertyName("start_year")]
+    public int StartYear { get; set; }
 }
 
-public class TeamMember
+public class StreamInfo
 {
-        [JsonPropertyName("role")]
-        public string Role { get; set; }
+    [JsonPropertyName("schedule")]
+    public string Schedule { get; set; }
 
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+    [JsonPropertyName("average_stream_duration")]
+    public string AverageStreamDuration { get; set; }
 
-        [JsonPropertyName("responsibilities")]
-        public string Responsibilities { get; set; }
+    [JsonPropertyName("popular_games")]
+    public List<string> PopularGames { get; set; }
+
+    [JsonPropertyName("language")]
+    public string Language { get; set; }
 }
 
-public class NewsItem
+public class CommunityInfo
 {
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("community_name")]
+    public string CommunityName { get; set; }
 
-        [JsonPropertyName("content")]
-        public string Content { get; set; }
+    [JsonPropertyName("moderators")]
+    public List<string> Moderators { get; set; }
+
+    [JsonPropertyName("subscriber_perks")]
+    public List<string> SubscriberPerks { get; set; }
+
+    [JsonPropertyName("discord_available")]
+    public bool DiscordAvailable { get; set; }
+}
+
+public class SocialMedia
+{
+    [JsonPropertyName("platform")]
+    public string Platform { get; set; }
+
+    [JsonPropertyName("url")]
+    public string Url { get; set; }
+}
+
+public class Achievement
+{
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
+
+    [JsonPropertyName("description")]
+    public string Description { get; set; }
+}
+
+public class Highlight
+{
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
+
+    [JsonPropertyName("description")]
+    public string Description { get; set; }
 }
